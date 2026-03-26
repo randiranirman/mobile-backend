@@ -1,0 +1,46 @@
+package org.devops.mobileshop.service;
+
+
+import lombok.RequiredArgsConstructor;
+import org.devops.mobileshop.dto.UserDto;
+import org.devops.mobileshop.model.Deliver;
+import org.devops.mobileshop.model.User;
+import org.devops.mobileshop.repository.DeliverRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+
+public class DeliverService {
+
+    private final DeliverRepository
+     deliverRepository;
+
+
+     public UserDto createDeliver( UserDto request) {
+
+
+         var  deliver = new Deliver();
+
+         deliver.setEmail(request.email());
+         deliver.setRole(request.role());
+        deliver.setPassword(request.password());
+        deliver.setUsername(request.username());
+        //  set phone number method
+
+         deliver.setPhoneNumber(request.phoneNumber());
+
+         deliver.setName( request.name());
+
+
+
+         // saving  the  deliver to the database
+         deliverRepository.save(deliver);
+
+
+
+
+        return  new UserDto(deliver.getUsername(), deliver.getRole(), deliver.getEmail(), deliver.getPhoneNumber(),
+                deliver.getName(), deliver.getPassword()) ;
+     }
+}
