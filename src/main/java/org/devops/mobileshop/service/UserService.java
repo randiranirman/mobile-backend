@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.devops.mobileshop.dto.UserDto;
 import org.devops.mobileshop.model.User;
 import org.devops.mobileshop.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,8 @@ public class UserService {
 
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
 
 
@@ -28,7 +31,7 @@ createdUser.setName(request.name());
 createdUser.setEmail(request.email());
 createdUser.setRole(request.role());
 
-createdUser.setPassword(request.password());
+createdUser.setPassword(passwordEncoder.encode(request.password()));
 createdUser.setUsername(request.username());
 createdUser.setPhoneNumber(request.phoneNumber());
 
