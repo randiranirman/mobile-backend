@@ -8,26 +8,28 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-@Document ( collection = "users")
+@Document( collection = "delivers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+
+public class Deliver {
+
 
     @Id
-    private  String id ;
+    private String id ;
 
-    private String name ;
     private String email ;
     private String username ;
-    private String phoneNumber ;
-
     private String role ;
     private String password ;
 
-
     @DBRef
-    private List<Order> orders;
+    private Order order;
+
+
+
+
 }
