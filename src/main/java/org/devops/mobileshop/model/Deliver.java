@@ -26,8 +26,13 @@ public class Deliver {
     private String role ;
     private String password ;
 
+    private String name ;
+
     @DBRef
     private Order order;
+
+    private String phoneNumber ;
+
 
 
 
