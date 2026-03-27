@@ -38,6 +38,9 @@ public class Order {
 
     private String  shippingAddress ;
 
+    private String billingAddress ;
+
+
 
 
 
