@@ -41,4 +41,18 @@ public class OrderController {
         return  orderService.getAllOrders()
                 ;
     }
+
+    @PostMapping("/accept-order/{deliverId}")
+
+    public List<OrderResponseDto> accpetOrder(@PathVariable String deliverId , @RequestBody List<String> orderIds)
+
+    {
+
+
+         return orderService.acceptOrder(deliverId, orderIds);
+
+
+
+
+    }
 }

@@ -13,6 +13,11 @@ public interface OrderRepository extends MongoRepository<Order, String> {
 
       Order findOrderByIdOrderByUserId( String id ) ;
 
+      List<Order> findOrdersByIdIn( List<String> ids ) ;
+
+      List<Order> findOrdersByDeliverId( String  id ) ;
+
+
 
       @Override
       List<Order> findAll();
