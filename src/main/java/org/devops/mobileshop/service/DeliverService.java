@@ -8,6 +8,9 @@ import org.devops.mobileshop.model.User;
 import org.devops.mobileshop.repository.DeliverRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 
@@ -42,5 +45,14 @@ public class DeliverService {
 
         return  new UserDto(deliver.getUsername(), deliver.getRole(), deliver.getEmail(), deliver.getPhoneNumber(),
                 deliver.getName(), deliver.getPassword()) ;
+     }
+
+     public List<UserDto> getAllDelivers( ) {
+         return   deliverRepository.findAll().stream().map( deliver ->  new UserDto(deliver.getUsername(), deliver.getRole(),
+                 deliver.getEmail()
+         ,deliver.getPhoneNumber(),
+                 deliver.getName(),
+                 deliver.getPassword()))
+                 .collect(Collectors.toList());
      }
 }

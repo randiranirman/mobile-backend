@@ -6,6 +6,7 @@ import org.devops.mobileshop.dto.ProductDto;
 //import org.devops.mobileshop.repository.ProductsRepository;
 import org.devops.mobileshop.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,4 +33,7 @@ public class ProductController {
 
 
     }
+
+
+
 }
