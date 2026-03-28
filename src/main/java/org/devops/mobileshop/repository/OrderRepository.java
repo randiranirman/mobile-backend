@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface OrderRepository extends MongoRepository<Order, String> {
 
       Order findOrderByIdOrderByUserId( String id ) ;
+      Order findOrderById( String id ) ;
 
       List<Order> findOrdersByIdIn( List<String> ids ) ;
 

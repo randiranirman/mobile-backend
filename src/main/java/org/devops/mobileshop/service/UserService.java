@@ -60,7 +60,6 @@ userRepository.insert(createdUser);
         // check if the user exists  if not throws the exception
 
         var user  = userRepository.findUserByEmail(request.email());
-        var deliver = deliverRepository.findDeliverByEmail( request.email());
 
 
 
@@ -69,7 +68,8 @@ userRepository.insert(createdUser);
 
 
 
-         if( user == null && user.getRole().equals("USER") ) {
+
+         if( user == null ) {
  throw   new UserNotFoundException(" user not registerd ");
 
          }
@@ -82,7 +82,13 @@ userRepository.insert(createdUser);
           }
 
 
-          return new UserDto( user.getUsername(), user.getRole() , user.getEmail() , user.getPhoneNumber() , user.getName() ,user.getPassword());
+              return new UserDto( user.getUsername(), user.getRole() , user.getEmail() , user.getPhoneNumber() , user.getName() ,user.getPassword());
+
+
+
+
+
+
 
 
 
