@@ -66,6 +66,10 @@ public class OrderService {
               createdOrder.setUser(user);
               createdOrder.setStatus("PENDING");
               createdOrder.setProductList(productList);
+              createdOrder.setShippingAddress(shippingAddress);
+              createdOrder.setBillingAddress(billingAddress);
+              createdOrder.setDeliver( null);
+
 
 
 
@@ -195,6 +199,28 @@ public class OrderService {
                 order.setStatus("OUT FOR DELIVER");
                 order.setDeliver(deliver);
             }
+         }
+
+
+         public  List<OrderResponseDto> getAllOrdersByDeliverId ( String id ) {
+
+            var deliver = deliverRepository.findDeliverById(id);
+            if( deliver == null){
+                throw    new UserNotFoundException("Deliver Not Found ") ;
+
+            }
+
+
+
+            return orderRepository.findOrdersByDeliverId(id).stream().map(order ->  new OrderResponseDto(order.getUser().getName(),
+                    order.getUser().getId(),
+                    order.getShippingAddress(),
+                    order.getBillingAddress(),
+                    order.getProductList()
+
+                    ))
+
+                    .collect(Collectors.toList());
          }
 
 

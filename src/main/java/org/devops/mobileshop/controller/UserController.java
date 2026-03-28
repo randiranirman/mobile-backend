@@ -3,6 +3,7 @@ package org.devops.mobileshop.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.devops.mobileshop.dto.LoginRequest;
 import org.devops.mobileshop.dto.UserDto;
 import org.devops.mobileshop.service.DeliverService;
 import org.devops.mobileshop.service.UserService;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping( "/api/user")
+
+
+@CrossOrigin("*")
 
 @RequiredArgsConstructor
 
@@ -25,7 +29,7 @@ public class UserController {
 
 
 
-    @PostMapping
+    @PostMapping("/register")
      public UserDto createUser(@RequestBody UserDto request) {
 
          return userService.createUser(request);
@@ -37,6 +41,12 @@ public class UserController {
 
 
         return  deliverService.createDeliver(request);
+     }
+
+     @PostMapping("/login")
+     public UserDto loginUser( @RequestBody LoginRequest request) {
+        return userService.loginUser( request);
+
      }
 
 
