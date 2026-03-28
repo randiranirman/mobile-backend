@@ -4,6 +4,7 @@ package org.devops.mobileshop.service;
 import lombok.RequiredArgsConstructor;
 import org.devops.mobileshop.dto.LoginRequest;
 import org.devops.mobileshop.dto.UserDto;
+import org.devops.mobileshop.dto.UserResponseDto;
 import org.devops.mobileshop.exception.UserNotFoundException;
 import org.devops.mobileshop.exception.UserNotRegistered;
 import org.devops.mobileshop.model.User;
@@ -24,7 +25,21 @@ public class UserService {
     private final DeliverRepository deliverRepository;
 
 
-    public UserDto createUser( UserDto request) {
+    public UserResponseDto getUserById( String userId ) {
+
+
+
+        var user = userRepository.findUserById( userId);
+        return  new UserResponseDto(user.getId(), user.getUsername(), user.getRole(),user.getEmail()
+        ,user.getPhoneNumber(),
+                user.getName(),
+                user.getPassword()
+        );
+
+    }
+
+
+    public UserResponseDto createUser(UserDto request) {
 
 var createdUser = new User();
 
@@ -41,7 +56,7 @@ createdUser.setPhoneNumber(request.phoneNumber());
 
 userRepository.insert(createdUser);
 
-  return new UserDto( createdUser.getUsername() ,createdUser.getRole() , createdUser.getEmail(), createdUser.getPhoneNumber(),createdUser.getName(), createdUser.getPassword())
+  return new UserResponseDto( createdUser.getId(),  createdUser.getUsername() ,createdUser.getRole() , createdUser.getEmail(), createdUser.getPhoneNumber(),createdUser.getName(), createdUser.getPassword())
 ;
 
 
@@ -53,7 +68,7 @@ userRepository.insert(createdUser);
 
 
 
-    public UserDto loginUser(LoginRequest request) {
+    public UserResponseDto loginUser(LoginRequest request) {
 
 
 
@@ -70,7 +85,7 @@ userRepository.insert(createdUser);
 
 
          if( user == null ) {
- throw   new UserNotFoundException(" user not registerd ");
+ throw   new UserNotFoundException(" user not registerd with  ");
 
          }
 
@@ -82,7 +97,7 @@ userRepository.insert(createdUser);
           }
 
 
-              return new UserDto( user.getUsername(), user.getRole() , user.getEmail() , user.getPhoneNumber() , user.getName() ,user.getPassword());
+              return new UserResponseDto ( user.getId(),  user.getUsername(), user.getRole() , user.getEmail() , user.getPhoneNumber() , user.getName() ,user.getPassword());
 
 
 
@@ -95,6 +110,8 @@ userRepository.insert(createdUser);
 
 
     }
+
+
 
 
 
