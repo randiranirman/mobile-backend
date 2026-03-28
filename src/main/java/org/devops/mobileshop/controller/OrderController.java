@@ -43,14 +43,14 @@ public class OrderController {
                 ;
     }
 
-    @PostMapping("/accept-order/{deliverId}")
+    @PostMapping("/accept-order/{orderId}/{deliverId}")
 
-    public List<OrderResponseDto> accpetOrder(@PathVariable String deliverId , @RequestBody List<String> orderIds)
+    public List<OrderResponseDto> accpetOrder(@PathVariable String deliverId , @PathVariable String orderId)
 
     {
 
 
-         return orderService.acceptOrder(deliverId, orderIds);
+         return orderService.acceptOrder(deliverId, orderId);
 
 
 

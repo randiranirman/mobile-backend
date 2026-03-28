@@ -107,10 +107,11 @@ public class OrderService {
               )).toList();
         }
 
-        public List<OrderResponseDto> acceptOrder(String deliverId , List<String> orderIds) {
+        public List<OrderResponseDto> acceptOrder(String deliverId , String orderIds) {
 
-            var orders = orderRepository.findOrdersByIdIn(orderIds);
-
+             //var orders = orderRepository.findOrdersByIdIn(orderIds);
+            var orders = orderRepository.findOrderById(orderIds)
+;
 
 
             var  deliver =  deliverRepository.findDeliverById( deliverId);
@@ -120,7 +121,7 @@ public class OrderService {
 
             }
             updateOrderStatus(orders, deliver);
-            orderRepository.saveAll(orders);
+orderRepository.save(orders);
 
 
 
@@ -189,16 +190,16 @@ public class OrderService {
 
         }
 
-         private void updateOrderStatus(List<Order> orderList , Deliver deliver
+         private void updateOrderStatus(Order orderList , Deliver deliver
          ){
 
 
 
-            for(  var order : orderList) {
 
-                order.setStatus("OUT FOR DELIVER");
-                order.setDeliver(deliver);
-            }
+
+                orderList.setStatus("OUT FOR DELIVER");
+                orderList.setDeliver(deliver);
+
          }
 
 
