@@ -56,7 +56,11 @@ public class OrderService {
 
 
 
-              var  productList =  productsRepository.findByIdIn( orderDto.productIds());
+              //var  productList =  productsRepository.findProductsByIdIn(orderDto.productIds())
+
+
+
+             //var product = productsRepository.findById(orderDto.productIds());
 
               var shippingAddress = orderDto.shippingAddress();
               var billingAddress = orderDto.billingAddress();
@@ -65,7 +69,7 @@ public class OrderService {
 
               createdOrder.setUser(user);
               createdOrder.setStatus("PENDING");
-              createdOrder.setProductList(productList);
+              createdOrder.setProductList(productsRepository.findProductByIdIn(orderDto.ids()));
               createdOrder.setShippingAddress(shippingAddress);
               createdOrder.setBillingAddress(billingAddress);
               createdOrder.setDeliver( null);
@@ -82,7 +86,7 @@ public class OrderService {
 
 
 
-                return new OrderDto(user.getName() ,user.getId(), shippingAddress, billingAddress ,orderDto.productIds());
+                return new OrderDto(user.getName() ,user.getId(), shippingAddress, billingAddress ,orderDto.ids());
 
 
 
@@ -106,6 +110,8 @@ public class OrderService {
 
               )).toList();
         }
+
+
 
         public List<OrderResponseDto> acceptOrder(String deliverId , String orderIds) {
 

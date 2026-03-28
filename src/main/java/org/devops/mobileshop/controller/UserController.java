@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.devops.mobileshop.dto.LoginRequest;
 import org.devops.mobileshop.dto.UserDto;
+import org.devops.mobileshop.dto.UserResponseDto;
 import org.devops.mobileshop.service.DeliverService;
 import org.devops.mobileshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,18 @@ public class UserController {
 
 
     @PostMapping("/register")
-     public UserDto createUser(@RequestBody UserDto request) {
+     public UserResponseDto createUser(@RequestBody UserDto request) {
 
          return userService.createUser(request);
 
+     }
+
+     @GetMapping("/{userId}")
+
+     public UserResponseDto getUserById( @PathVariable String userId) {
+
+
+        return userService.getUserById(userId);
      }
 
      @PostMapping("/deliver")
@@ -44,7 +53,7 @@ public class UserController {
      }
 
      @PostMapping("/login")
-     public UserDto loginUser( @RequestBody LoginRequest request) {
+     public UserResponseDto loginUser( @RequestBody LoginRequest request) {
         return userService.loginUser( request);
 
      }

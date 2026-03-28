@@ -14,6 +14,16 @@ import java.util.List;
 public interface ProductsRepository extends MongoRepository<Product, String> {
 
 
-          List<Product> findByIdIn( List<String> ids );
+
+
+
+    List<Product> findProductByIdIn( List<String>  ids  );
+
+
+
+
+
+
+
 
 }
