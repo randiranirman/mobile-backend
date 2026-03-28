@@ -16,6 +16,8 @@ public interface DeliverRepository  extends MongoRepository<Deliver, String> {
 
     Deliver findDeliverById( String id );
 
+    Deliver findDeliverByEmail( String email) ;
+
     @Override
     List<Deliver> findAll();
 }

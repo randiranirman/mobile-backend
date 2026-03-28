@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
 
+@CrossOrigin("*")
 public class OrderController {
 
 
@@ -54,5 +55,14 @@ public class OrderController {
 
 
 
+    }
+
+    @GetMapping("/{deliverId}")
+
+    public  List<OrderResponseDto> getAllOrdersByDeliverId(  @PathVariable String  deliverId) {
+
+
+
+         return orderService.getAllOrdersByDeliverId( deliverId);
     }
 }
