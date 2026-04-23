@@ -101,6 +101,9 @@ public class OrderService {
 
 
               return   orderRepository.findAll().stream().map( order -> new OrderResponseDto(
+                      order.getId(),
+                      order.getStatus(),
+
                       order.getUser().getName(),
                       order.getUser().getId(),
                       order.getShippingAddress(),
@@ -111,6 +114,26 @@ public class OrderService {
               )).toList();
         }
 
+
+        public List<OrderResponseDto> getOrderByUserId ( String  userId) {
+
+
+            var  orders = orderRepository.findOrderByUserId(userId);
+            if(orders.isEmpty()){
+                 throw    new RuntimeException("No orders found");
+            }
+            return orders.stream().map(order ->  new OrderResponseDto(
+                    order.getId(),
+                    order.getStatus(),
+                    order.getUser().getName(),
+                    order.getUser().getId(),
+                    order.getShippingAddress(),
+                    order.getBillingAddress(),
+                    order.getProductList()
+
+
+            )).collect(Collectors.toList());
+        }
 
 
         public List<OrderResponseDto> acceptOrder(String deliverId , String orderIds) {
@@ -134,6 +157,8 @@ orderRepository.save(orders);
             var acceptedOrders = orderRepository.findOrdersByDeliverId(deliverId);
 
             return acceptedOrders.stream().map( order -> new OrderResponseDto(
+                    order.getId(),
+                    order.getStatus(),
                     order.getUser().getName(),
                     order.getUser().getId(),
                     order.getShippingAddress(),
@@ -219,7 +244,7 @@ orderRepository.save(orders);
 
 
 
-            return orderRepository.findOrdersByDeliverId(id).stream().map(order ->  new OrderResponseDto(order.getUser().getName(),
+            return orderRepository.findOrdersByDeliverId(id).stream().map(order ->  new OrderResponseDto(order.getId(),  order.getStatus(), order.getUser().getName(),
                     order.getUser().getId(),
                     order.getShippingAddress(),
                     order.getBillingAddress(),

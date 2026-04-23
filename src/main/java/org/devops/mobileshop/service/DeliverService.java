@@ -2,6 +2,7 @@ package org.devops.mobileshop.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.devops.mobileshop.dto.DeliverDto;
 import org.devops.mobileshop.dto.LoginRequest;
 import org.devops.mobileshop.dto.UserDto;
 import org.devops.mobileshop.exception.PasswordInvalidException;
@@ -55,7 +56,7 @@ public class DeliverService {
      }
 
 
-      public UserDto loginDeliver(LoginRequest request) {
+      public DeliverDto loginDeliver(LoginRequest request) {
 
 
 
@@ -78,7 +79,7 @@ public class DeliverService {
 
          }
 
-         return new UserDto(deliver.getUsername(), deliver.getRole(), deliver.getEmail(), deliver.getPhoneNumber(),
+         return new DeliverDto(deliver.getId(),deliver.getUsername(), deliver.getRole(), deliver.getEmail(), deliver.getPhoneNumber(),
                  deliver.getName(),
 
                  deliver.getPassword());

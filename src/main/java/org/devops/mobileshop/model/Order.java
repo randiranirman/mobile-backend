@@ -4,6 +4,7 @@ package org.devops.mobileshop.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -38,7 +39,10 @@ public class Order {
 
     private String  shippingAddress ;
 
-    private String billingAddress ;
+    private String  billingAddress ;
+
+
+    
 
 
 
