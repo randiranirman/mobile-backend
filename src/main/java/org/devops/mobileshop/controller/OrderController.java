@@ -36,6 +36,13 @@ public class OrderController {
     }
 
 
+    @GetMapping("/user")
+    public List<OrderResponseDto>
+ getOrdersByUserId( @RequestParam
+                     String userId) {
+        return orderService.getOrderByUserId(userId);
+    }
+
     @GetMapping
     public List<OrderResponseDto> getAllOrders( ) {
 
